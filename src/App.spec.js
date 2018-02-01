@@ -18,7 +18,7 @@ beforeAll(async () => {
   page = await browser.newPage()
 })
 
-describe('Application', () => {
+describe('Bookish', () => {
   test('Heading', async () => {
     await page.goto(`${appUrlBase}`)
     const result = await page.evaluate(() => {
@@ -28,7 +28,7 @@ describe('Application', () => {
     expect(result).toEqual('Bookish')
   })
 
-  test('Show A List of books', async () => {
+  test('Show a list of books', async () => {
     await page.goto(`${appUrlBase}`)
     const books = await page.evaluate(() => {
       return [...document.querySelectorAll('.book .title')].map(el => el.innerText)
