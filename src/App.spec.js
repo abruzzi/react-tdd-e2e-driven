@@ -21,9 +21,22 @@ beforeAll(async () => {
 describe('Application', () => {
   test('Heading', async () => {
     await page.goto(`${appUrlBase}`)
-    const element = await page.$eval('h1', el => el.innerText)
+    const result = await page.evaluate(() => {
+      return document.querySelector('h1').innerText
+    })
 
-    expect(element).toEqual('Hello World')
+    expect(result).toEqual('Bookish')
+  })
+
+  test('Show A List of books', async () => {
+    await page.goto(`${appUrlBase}`)
+    const books = await page.evaluate(() => {
+      return [...document.querySelectorAll('.book .title')].map(el => el.innerText)
+    })
+
+    expect(books.length).toEqual(2)
+    expect(books[0]).toEqual('Implementing Microservice')
+    expect(books[1]).toEqual('Domain Driven Design')
   })
 })
 
