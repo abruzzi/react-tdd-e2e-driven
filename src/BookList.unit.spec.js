@@ -3,6 +3,13 @@ import {shallow} from 'enzyme'
 import BookList from './BookList'
 
 describe('BookList', () => {
+    it('Show empty book list when no data given', () => {
+        const books = []
+
+        const wrapper = shallow(<BookList books={books} />)
+        expect(wrapper.find('Book').length).toEqual(0)
+    })
+
     it('Show book list', () => {
         const books = [
             {title: "Implementing Microservice", author: "Sam Newman"},
@@ -10,10 +17,6 @@ describe('BookList', () => {
         ]
 
         const wrapper = shallow(<BookList books={books} />)
-        expect(wrapper.find('.book').length).toEqual(2)
-
-        expect(wrapper.find('.book .title').length).toEqual(2)
-        expect(wrapper.find('.book .title').at(0).text()).toEqual("Implementing Microservice")
-        expect(wrapper.find('.book .author').at(0).text()).toEqual("Sam Newman")
+        expect(wrapper.find('Book').length).toEqual(2)
     })
 })

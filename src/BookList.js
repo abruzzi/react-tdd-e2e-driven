@@ -1,16 +1,12 @@
 import React from 'react'
 import './BookList.css'
+import Book from './Book'
 
 function BookList({books}) {
 	return (
       <div>
         {
-          books.map(book => {
-            return (<article className="book">
-              <h3 className="title">{book.title}</h3>
-              <h3 className="author">{book.author}</h3>
-            </article>)
-          })
+          books.map(book => <Book book={book} />)
         }
       </div>
       )
