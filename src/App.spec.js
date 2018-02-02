@@ -21,6 +21,7 @@ beforeAll(async () => {
 describe('Bookish', () => {
   test('Heading', async () => {
     await page.goto(`${appUrlBase}`)
+    await page.waitForSelector('h1')
     const result = await page.evaluate(() => {
       return document.querySelector('h1').innerText
     })

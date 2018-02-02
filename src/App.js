@@ -8,6 +8,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      loading: true,
       books: []
     }
   }
@@ -15,13 +16,20 @@ class App extends Component {
   componentDidMount() {
     axios.get('http://localhost:8080/books').then(res => {
       this.setState({
-        books: res.data
+        books: res.data,
+        loading: false
       })
+    }).catch((err) => {
+      this.setState({loading: false})
     })
   }
 
   render() {
-    const {books} = this.state
+    const {loading, books} = this.state
+
+    if(loading) {
+      return <div className="loading" />
+    }
 
     return (
       <div className="container">
