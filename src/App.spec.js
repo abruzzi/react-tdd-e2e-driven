@@ -30,13 +30,15 @@ describe('Bookish', () => {
 
   test('Show a list of books', async () => {
     await page.goto(`${appUrlBase}`)
+    await page.waitForSelector('.book .title')
     const books = await page.evaluate(() => {
       return [...document.querySelectorAll('.book .title')].map(el => el.innerText)
     })
 
-    expect(books.length).toEqual(2)
+    expect(books.length).toEqual(3)
     expect(books[0]).toEqual('Implementing Microservice')
     expect(books[1]).toEqual('Domain Driven Design')
+    expect(books[2]).toEqual('Refactoring')
   })
 })
 
