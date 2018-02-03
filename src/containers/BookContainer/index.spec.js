@@ -1,6 +1,6 @@
 import React from 'react'
 import {shallow} from 'enzyme'
-import BookContainer from './BookContainer'
+import BookContainer from './index'
 import axios from 'axios'
 
 const flushPromises = () => new Promise(resolve => setImmediate(resolve))

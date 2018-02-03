@@ -1,5 +1,4 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
 
 function BookDetail({book}) {
     return (<article className="book">

@@ -1,6 +1,6 @@
 import React from 'react'
 import {shallow} from 'enzyme'
-import BookList from './BookList'
+import BookList from './index'
 
 describe('BookList', () => {
     it('Show empty book list when no data given', () => {
