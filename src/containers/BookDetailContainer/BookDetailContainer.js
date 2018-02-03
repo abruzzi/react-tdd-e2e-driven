@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 
-import Book from '../components/Book'
+import BookDetail from '../../components/BookDetail/BookDetail'
 
 class BookDetailContainer extends Component {
     constructor(props) {
@@ -24,7 +24,7 @@ class BookDetailContainer extends Component {
     render() {
         console.log(this.props)
         const {book} = this.state
-        return <Book book={book} />
+        return <BookDetail book={book} />
     }
 }
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './BookContainer.css'
-import BookList from '../components/BookList'
+import BookList from '../../components/BookList/BookList'
 
 import axios from 'axios'
 

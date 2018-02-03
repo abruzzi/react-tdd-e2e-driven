@@ -2,7 +2,7 @@ import React from 'react'
 import {shallow} from 'enzyme'
 import Book from './Book'
 
-describe('Book', () => {
+describe('BookDetail', () => {
     it('Show book name & book author', () => {
         const book = {
             title: "Building Microservices", author: "Sam Newman"
