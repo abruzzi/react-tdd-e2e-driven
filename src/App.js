@@ -2,8 +2,8 @@ import React from 'react'
 import {Route} from 'react-router-dom'
 
 import './App.css'
-import BookContainer from './BookContainer'
-import BookDetailContainer from './BookDetailContainer'
+import BookContainer from './containers/BookContainer'
+import BookDetailContainer from './containers/BookDetailContainer'
 
 function App () {
     return (
