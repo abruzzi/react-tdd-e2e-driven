@@ -20,7 +20,7 @@ beforeAll(async () => {
 
 describe('Bookish', () => {
   test('Heading', async () => {
-    await page.goto(`${appUrlBase}`)
+    await page.goto(`${appUrlBase}/`)
     await page.waitForSelector('h1')
     const result = await page.evaluate(() => {
       return document.querySelector('h1').innerText
@@ -30,7 +30,7 @@ describe('Bookish', () => {
   })
 
   test('Show a list of books', async () => {
-    await page.goto(`${appUrlBase}`)
+    await page.goto(`${appUrlBase}/books`)
     await page.waitForSelector('.book .title')
     const books = await page.evaluate(() => {
       return [...document.querySelectorAll('.book .title')].map(el => el.innerText)
@@ -41,6 +41,23 @@ describe('Bookish', () => {
     expect(books[1]).toEqual('Domain Driven Design')
     expect(books[2]).toEqual('Refactoring')
   })
+
+  test('Goto book detail page', async () => {
+      await page.goto(`${appUrlBase}/books`)
+      await page.waitForSelector('a.view-detail')
+
+      const links = await page.evaluate(() => {
+          return [...document.querySelectorAll('a.view-detail')].map(el => el.getAttribute('href'))
+      })
+
+      await Promise.all([
+          page.waitForNavigation({waitUntil:'networkidle2'}),
+          page.goto(`${appUrlBase}${links[0]}`)
+      ])
+
+      const url = await page.evaluate('location.href')
+      expect(url).toEqual(`${appUrlBase}/books/1`)
+  }, 10000)
 })
 
 afterAll(() => {

@@ -1,17 +1,17 @@
 import React from 'react'
 import {shallow} from 'enzyme'
-import App from './app'
+import BookContainer from './BookContainer'
 import axios from 'axios'
 
 const flushPromises = () => new Promise(resolve => setImmediate(resolve))
 
-describe('App Component', () => {
+describe('BookContainer Component', () => {
     it('Show loading indicator', async () => {
         const books = [
             {title: "Building Microservices"}
         ]
         axios.get = jest.fn().mockImplementation(() => Promise.resolve({data: books}))
-        const wrapper = shallow(<App />)
+        const wrapper = shallow(<BookContainer />)
         expect(wrapper.find('.loading').length).toEqual(1)
         expect(wrapper.find('BookList').length).toEqual(0)
 
