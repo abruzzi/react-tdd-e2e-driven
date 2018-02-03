@@ -8,7 +8,7 @@ const flushPromises = () => new Promise(resolve => setImmediate(resolve))
 describe('App Component', () => {
     it('Show loading indicator', async () => {
         const books = [
-            {title: "Implementing Microservice"}
+            {title: "Building Microservices"}
         ]
         axios.get = jest.fn().mockImplementation(() => Promise.resolve({data: books}))
         const wrapper = shallow(<App />)
