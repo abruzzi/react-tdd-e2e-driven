@@ -62,7 +62,7 @@ describe('Bookish', () => {
       const result = await page.evaluate(() => {
           return document.querySelector('.description').innerText
       })
-      expect(result).toEqual('')
+      expect(result).toEqual('Building Microservices')
   })
 })
 
