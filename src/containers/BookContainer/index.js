@@ -9,12 +9,14 @@ class BookContainer extends Component {
     super(props)
     this.state = {
       loading: true,
+      term: '',
       books: []
     }
+    this.filterBook = this.filterBook.bind(this)
   }
 
-  componentDidMount() {
-    axios.get('http://localhost:8080/books').then(res => {
+  fetchBooksFromRemote() {
+    axios.get(`http://localhost:8080/books?q=${this.state.term}`).then(res => {
       this.setState({
         books: res.data,
         loading: false
@@ -24,14 +26,28 @@ class BookContainer extends Component {
     })
   }
 
+  componentDidMount() {
+    this.fetchBooksFromRemote()
+  }
+
+  filterBook(e) {
+    this.setState({
+      term: e.target.value,
+      loading: true
+    }, this.fetchBooksFromRemote)
+  }
+
   render() {
     const {loading, books} = this.state
 
-    if(loading) {
-      return <div className="loading" />
-    }
+    return (<div>
+      <input type="text" className="search" placeholder="Type to search" onChange={this.filterBook}
+             value={this.state.term}/>
+      {
+        loading ? <div className="loading"/> : <BookList books={books}/>
+      }
 
-    return <BookList books={books} />
+    </div>)
   }
 }
 
