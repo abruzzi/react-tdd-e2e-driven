@@ -12,7 +12,6 @@ class BookDetailContainer extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props)
         const id = this.props.match.params.id
         axios.get(`http://localhost:8080/books/${id}`).then((res) => {
             this.setState({
