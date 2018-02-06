@@ -21,7 +21,6 @@ class BookDetailContainer extends Component {
     }
 
     render() {
-        console.log(this.props)
         const {book} = this.state
         return <BookDetail book={book} />
     }
