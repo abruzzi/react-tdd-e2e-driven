@@ -18,7 +18,23 @@ beforeAll(async () => {
   page = await browser.newPage()
 })
 
+import axios from 'axios'
+
 describe('Bookish', () => {
+  afterEach(() => {
+    return axios.delete('http://localhost:8080/books?_cleanup=true').catch(err => err)
+  })
+
+  beforeEach(() => {
+    const books = [
+      {"title": "Building Microservices", "author": "Sam Newman", "price": 100, "description": "Building Microservices"},
+      {"title": "Domain Driven Design", "author": "Eric Evans","price": 101, "description": "Domain Driven Design"},
+      {"title": "Refactoring", "author": "Martin Fowler", "price": 102, "description": "Refactoring"}
+    ]
+
+    return books.map(item => axios.post('http://localhost:8080/books', item, {headers: { 'Content-Type': 'application/json' }}))
+  })
+
   describe('Book List', () => {
     test('Heading', async () => {
       await page.goto(`${appUrlBase}/`)
@@ -38,9 +54,9 @@ describe('Bookish', () => {
       })
 
       expect(books.length).toEqual(3)
-      expect(books[0]).toEqual('Building Microservices')
-      expect(books[1]).toEqual('Domain Driven Design')
-      expect(books[2]).toEqual('Refactoring')
+      expect(books).toContain('Building Microservices')
+      expect(books).toContain('Domain Driven Design')
+      expect(books).toContain('Refactoring')
     })
 
   })
